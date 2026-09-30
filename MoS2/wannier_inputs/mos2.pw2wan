@@ -1,0 +1,7 @@
+&inputpp
+  outdir    = './tmp'
+  prefix    = 'mos2'
+  seedname  = 'mos2'
+  write_amn = .true.
+  write_mmn = .true.
+/

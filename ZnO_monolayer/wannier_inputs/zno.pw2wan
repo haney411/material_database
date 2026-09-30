@@ -1,0 +1,7 @@
+&inputpp
+  outdir    = './tmp'
+  prefix    = 'zno'
+  seedname  = 'zno'
+  write_amn = .true.
+  write_mmn = .true.
+/

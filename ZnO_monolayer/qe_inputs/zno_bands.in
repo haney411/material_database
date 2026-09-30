@@ -1,0 +1,40 @@
+&CONTROL
+  calculation   = 'bands'
+  prefix        = 'zno'
+  outdir        = './tmp'
+  pseudo_dir    = '/home/haney411/wrk/qe/SSSP_1.3.0_PBE_efficiency'
+  verbosity     = 'high'
+/
+
+&SYSTEM
+  ibrav         = 4
+  celldm(1)     = 6.205
+  celldm(3)     = 7.615
+  nat           = 2
+  ntyp          = 2
+  ecutwfc       = 80.0
+  ecutrho       = 640.0
+  nbnd          = 25
+  occupations   = 'fixed'
+/
+
+&ELECTRONS
+  conv_thr      = 1.0d-10
+  diagonalization = 'david'
+  diago_david_ndim = 8
+/
+
+ATOMIC_SPECIES
+  Zn  65.38   Zn_pbe_v1.uspp.F.UPF
+  O   15.999  O.pbe-n-kjpaw_psl.0.1.UPF
+
+ATOMIC_POSITIONS {crystal}
+  Zn   0.333333333  0.666666667  0.500000
+  O    0.666666667  0.333333333  0.500000
+
+K_POINTS {crystal_b}
+4
+  0.000000  0.000000  0.000000  20  ! G
+  0.500000  0.000000  0.000000  12  ! M
+  0.333333  0.333333  0.000000  20  ! K
+  0.000000  0.000000  0.000000  1   ! G

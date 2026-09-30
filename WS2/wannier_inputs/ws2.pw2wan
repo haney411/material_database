@@ -1,0 +1,8 @@
+&inputpp
+  outdir   = './tmp'
+  prefix   = 'ws2'
+  seedname = 'ws2'
+  write_amn = .true.
+  write_mmn = .true.
+  spin_component = 'none'
+/

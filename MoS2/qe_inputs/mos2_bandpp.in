@@ -1,0 +1,6 @@
+&BANDS
+  prefix  = 'mos2'
+  outdir  = './tmp'
+  filband = 'mos2_bands.dat'
+  lsym    = .false.
+/

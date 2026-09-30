@@ -1,0 +1,35 @@
+&CONTROL
+  calculation   = 'scf'
+  prefix        = 'graphene'
+  outdir        = './tmp'
+  pseudo_dir    = '/home/haney411/wrk/qe/SSSP_1.3.0_PBE_efficiency'
+  verbosity     = 'high'
+/
+
+&SYSTEM
+  ibrav         = 4
+  celldm(1)     = 4.6487262666
+  celldm(3)     = 8.0000000000
+  nat           = 2
+  ntyp          = 1
+  ecutwfc       = 50.0
+  ecutrho       = 400.0
+  occupations   = 'smearing'
+  smearing      = 'mv'
+  degauss       = 0.01
+/
+
+&ELECTRONS
+  conv_thr      = 1.0d-10
+  mixing_beta   = 0.7
+/
+
+ATOMIC_SPECIES
+  C  12.011  C.pbe-n-kjpaw_psl.1.0.0.UPF
+
+ATOMIC_POSITIONS {crystal}
+  C  0.3333333333  0.6666666667  0.0000000000
+  C  0.6666666667  0.3333333333  0.0000000000
+
+K_POINTS {automatic}
+  24 24 1 0 0 0

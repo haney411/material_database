@@ -1,0 +1,34 @@
+&CONTROL
+  calculation = 'bands'
+  prefix      = 'ws2'
+  outdir      = './tmp'
+  pseudo_dir  = '/home/haney411/wrk/qe'
+/
+&SYSTEM
+  ibrav       = 4
+  celldm(1)   = 6.009329
+  celldm(3)   = 6.289308
+  nat         = 3
+  ntyp        = 2
+  ecutwfc     = 70.0
+  nbnd        = 44
+  noncolin    = .true.
+  lspinorb    = .true.
+/
+&ELECTRONS
+/
+ATOMIC_SPECIES
+  W   183.84   W_ONCV_PBE_fr.upf
+  S    32.065  S_ONCV_PBE_fr.upf
+
+ATOMIC_POSITIONS {crystal}
+  W   0.333333333  0.666666667  0.500000
+  S   0.666666667  0.333333333  0.578250
+  S   0.666666667  0.333333333  0.421750
+
+K_POINTS {crystal_b}
+4
+  0.000000  0.000000  0.000  30
+  0.500000  0.000000  0.000  20
+  0.333333  0.333333  0.000  30
+  0.000000  0.000000  0.000   0

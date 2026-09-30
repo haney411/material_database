@@ -1,0 +1,31 @@
+&CONTROL
+  calculation   = 'scf'
+  prefix        = 'silicon'
+  outdir        = './tmp'
+  pseudo_dir    = '/home/haney411/wrk/qe/SSSP_1.3.0_PBE_efficiency'
+  tprnfor       = .true.
+/
+
+&SYSTEM
+  ibrav         = 2
+  celldm(1)     = 10.2
+  nat           = 2
+  ntyp          = 1
+  ecutwfc       = 40.0
+  ecutrho       = 320.0
+/
+
+&ELECTRONS
+  conv_thr        = 1.0d-12
+  diagonalization = 'cg'
+/
+
+ATOMIC_SPECIES
+  Si  28.086  Si.pbe-n-rrkjus_psl.1.0.0.UPF
+
+ATOMIC_POSITIONS {crystal}
+  Si  -0.25   0.75  -0.25
+  Si   0.00   0.00   0.00
+
+K_POINTS {automatic}
+  10 10 10 0 0 0

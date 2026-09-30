@@ -1,0 +1,7 @@
+&inputpp
+  outdir   = './tmp'
+  prefix   = 'wte2'
+  seedname = 'wte2'
+  write_amn = .true.
+  write_mmn = .true.
+/

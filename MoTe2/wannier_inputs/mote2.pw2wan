@@ -1,0 +1,7 @@
+&inputpp
+  outdir   = './tmp'
+  prefix   = 'mote2'
+  seedname = 'mote2'
+  write_amn = .true.
+  write_mmn = .true.
+/

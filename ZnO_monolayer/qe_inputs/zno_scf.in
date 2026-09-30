@@ -1,0 +1,34 @@
+&CONTROL
+  calculation   = 'scf'
+  prefix        = 'zno'
+  outdir        = './tmp'
+  pseudo_dir    = '/home/haney411/wrk/qe/SSSP_1.3.0_PBE_efficiency'
+  verbosity     = 'high'
+/
+
+&SYSTEM
+  ibrav         = 4
+  celldm(1)     = 6.205
+  celldm(3)     = 7.615
+  nat           = 2
+  ntyp          = 2
+  ecutwfc       = 80.0
+  ecutrho       = 640.0
+  occupations   = 'fixed'
+/
+
+&ELECTRONS
+  conv_thr      = 1.0d-10
+  mixing_beta   = 0.7
+/
+
+ATOMIC_SPECIES
+  Zn  65.38   Zn_pbe_v1.uspp.F.UPF
+  O   15.999  O.pbe-n-kjpaw_psl.0.1.UPF
+
+ATOMIC_POSITIONS {crystal}
+  Zn   0.333333333  0.666666667  0.500000
+  O    0.666666667  0.333333333  0.500000
+
+K_POINTS {automatic}
+  12 12 1 0 0 0

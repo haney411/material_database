@@ -1,0 +1,30 @@
+&CONTROL
+  calculation = 'scf'
+  prefix      = 'mose2'
+  outdir      = './tmp'
+  pseudo_dir  = '/home/haney411/wrk/qe/SSSP_1.3.0_PBE_efficiency'
+/
+&SYSTEM
+  ibrav       = 4
+  celldm(1)   = 6.179404
+  celldm(3)   = 6.116208
+  nat         = 3
+  ntyp        = 2
+  ecutwfc     = 50.0
+  ecutrho     = 400.0
+/
+&ELECTRONS
+  mixing_beta = 0.3
+  conv_thr    = 1.0d-8
+/
+ATOMIC_SPECIES
+  Mo  95.94   Mo_ONCV_PBE-1.0.oncvpsp.upf
+  Se  78.96   Se_pbe_v1.uspp.F.UPF
+
+ATOMIC_POSITIONS {crystal}
+  Mo  0.333333333  0.666666667  0.500000
+  Se  0.666666667  0.333333333  0.583500
+  Se  0.666666667  0.333333333  0.416500
+
+K_POINTS {automatic}
+  12 12 1  0 0 0

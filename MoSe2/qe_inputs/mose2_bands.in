@@ -1,0 +1,33 @@
+&CONTROL
+  calculation = 'bands'
+  prefix      = 'mose2'
+  outdir      = './tmp'
+  pseudo_dir  = '/home/haney411/wrk/qe/SSSP_1.3.0_PBE_efficiency'
+/
+&SYSTEM
+  ibrav       = 4
+  celldm(1)   = 6.179404
+  celldm(3)   = 6.116208
+  nat         = 3
+  ntyp        = 2
+  ecutwfc     = 50.0
+  ecutrho     = 400.0
+  nbnd        = 20
+/
+&ELECTRONS
+/
+ATOMIC_SPECIES
+  Mo  95.94   Mo_ONCV_PBE-1.0.oncvpsp.upf
+  Se  78.96   Se_pbe_v1.uspp.F.UPF
+
+ATOMIC_POSITIONS {crystal}
+  Mo  0.333333333  0.666666667  0.500000
+  Se  0.666666667  0.333333333  0.583500
+  Se  0.666666667  0.333333333  0.416500
+
+K_POINTS {crystal_b}
+4
+  0.000000  0.000000  0.000  30
+  0.500000  0.000000  0.000  20
+  0.333333  0.333333  0.000  30
+  0.000000  0.000000  0.000   0
