@@ -1,0 +1,33 @@
+&CONTROL
+  calculation   = 'scf'
+  prefix        = 'gaas'
+  outdir        = './tmp'
+  pseudo_dir    = '/home/haney411/wrk/qe/SSSP_1.3.0_PBE_efficiency'
+  tprnfor       = .true.
+  tstress       = .true.
+/
+
+&SYSTEM
+  ibrav         = 2
+  celldm(1)     = 10.684        ! experimental a = 5.6537 A (Ponce et al. PRB 2021, Table I)
+  nat           = 2
+  ntyp          = 2
+  ecutwfc       = 70.0          ! Ga PAW (3d in valence) header: 60 Ry
+  ecutrho       = 560.0         ! 8x for PAW/USPP
+/
+
+&ELECTRONS
+  conv_thr        = 1.0d-11
+  mixing_beta     = 0.5
+/
+
+ATOMIC_SPECIES
+  Ga  69.723  Ga.pbe-dn-kjpaw_psl.1.0.0.UPF
+  As  74.922  As.pbe-n-rrkjus_psl.0.2.UPF
+
+ATOMIC_POSITIONS {crystal}
+  Ga   0.00   0.00   0.00
+  As  -0.25   0.75  -0.25
+
+K_POINTS {automatic}
+  10 10 10 0 0 0

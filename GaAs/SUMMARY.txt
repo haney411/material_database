@@ -1,0 +1,70 @@
+GaAs bulk Wannier model: summary (2026-09-30)
+==============================================
+
+Literature check
+----------------
+- Ponce et al. (PRB 2021, arXiv:2105.04192) used sp3 on both Ga and As
+  (8 WFs, 16 with SOC), experimental lattice constant 10.684 bohr, and
+  excluded the Ga 3d semicore bands from the Wannierisation. This setup
+  follows that.
+- The PBE lattice constant is about 1-2% too large, and the gap nearly closes
+  there (Materials Project GGA gives 0.18 eV). The experimental lattice is
+  used instead, where PBE gives about 0.5 eV.
+- The wannier90 tutorial21 GaAs example also uses a = 10.68 bohr.
+
+Setup (GaAs_wannier/)
+---------------------
+- PBE, no SOC, Ga PAW (with 3d) + As USPP, cutoffs 70/560 Ry,
+  10x10x10 grid.
+- 24 DFT bands. The 5 Ga-3d bands (about 12.7 eV below the VBM and lower)
+  are excluded, leaving 19 bands for 8 WFs.
+- Projections: Ga: s;p and As: s;p. Each WF stays centred on its atom.
+- write_tb, write_hr and write_xyz are all on.
+
+Results
+-------
+- DFT gap: 0.534 eV (direct, at Gamma). Wannier gap: 0.5345 eV.
+- Valence bands match DFT within 13 meV.
+
+Disentanglement-window tests (worst conduction-band error vs DFT, below VBM+6 eV):
+
+  froz_max                 Total spread   Worst CB error
+  VBM+7.2 eV (chosen)      32 A^2         0.09 eV
+  VBM+5.3 eV               24 A^2         0.20 eV
+  VBM+4.0 eV               22 A^2         0.77 eV
+
+The chosen window gives wider WFs but accurate conduction bands up to about
+7 eV above the VBM, which covers the main absorption peaks.
+Production values: dis_froz_max = 13.9 eV, dis_win_max = 20.0 eV (absolute).
+Plot: GaAs_wannier_bands.png
+
+Things to know for the absorption calculation
+---------------------------------------------
+- Frequency ceiling: 8 WFs describe only the 4 lowest conduction bands.
+  Absorption above about 6-7 eV will be missing transitions into higher bands.
+- Gap correction: the PBE gap (0.53 eV) is far below experiment
+  (1.52 eV at 0 K). Use postw90 Kubo (berry_task = kubo) with a
+  scissors_shift of about 0.99 eV.
+- k-mesh: the Gamma conduction valley is very light in PBE, so Kubo needs a
+  dense interpolation grid (80^3 or more, or adaptive refinement) to converge
+  near the band edge.
+- Cost of a redo: the NSCF step took 40 min. This machine has 4 physical
+  cores, so mpirun -np 8 fails; use -np 4.
+- Leftovers: the window tests are still in test_A to test_D and can be
+  deleted.
+
+Possible next steps
+-------------------
+- postw90 absorption input
+- SOC version (16 WFs)
+
+Sources
+-------
+- Ponce et al., First-principles predictions of Hall and drift mobilities in
+  semiconductors: https://arxiv.org/pdf/2105.04192
+- Materials Project mp-2534 (GaAs):
+  https://legacy.materialsproject.org/materials/mp-2534/
+- Marzari et al., MLWFs: Theory and applications:
+  https://arxiv.org/pdf/1112.5411
+- Souza, Marzari, Vanderbilt, MLWFs for entangled energy bands:
+  https://arxiv.org/pdf/cond-mat/0108084
