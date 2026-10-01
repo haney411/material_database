@@ -1,0 +1,7 @@
+&inputpp
+  outdir    = './tmp'
+  prefix    = 'ges'
+  seedname  = 'ges'
+  write_amn = .true.
+  write_mmn = .true.
+/

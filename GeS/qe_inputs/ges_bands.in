@@ -1,0 +1,44 @@
+&CONTROL
+  calculation   = 'bands'
+  prefix        = 'ges'
+  outdir        = './tmp_bands'
+  pseudo_dir    = '/home/haney411/wrk/qe/SSSP_1.3.0_PBE_efficiency'
+  verbosity     = 'high'
+/
+
+&SYSTEM
+  ibrav         = 0             ! a,b from Gomes & Carvalho PRB 92 085406 (PBE); atoms relaxed; x = armchair/polar, y = zigzag
+  nat           = 4
+  ntyp          = 2
+  ecutwfc       = 45.0
+  ecutrho       = 360.0         ! 8x for USPP
+  nbnd          = 40
+/
+
+&ELECTRONS
+  conv_thr      = 1.0d-10
+  diago_full_acc = .true.
+/
+
+ATOMIC_SPECIES
+  Ge  72.630  ge_pbe_v1.4.uspp.F.UPF
+  S   32.065  s_pbe_v1.4.uspp.F.UPF
+
+CELL_PARAMETERS {bohr}
+  8.3147950000  0.0000000000  0.0000000000
+  0.0000000000  6.9541922121  0.0000000000
+  0.0000000000  0.0000000000  37.7945227651
+
+ATOMIC_POSITIONS {crystal}
+  Ge  0.0067216305  0.2500000000  0.5638065245
+  S   0.1332783695  0.2500000000  0.4461607974
+  Ge  0.5067216305  0.7500000000  0.4361934755
+  S   0.6332783695  0.7500000000  0.5538392026
+
+K_POINTS {crystal_b}
+5
+  0.000000 0.000000 0.000000 40  ! G
+  0.500000 0.000000 0.000000 40  ! X
+  0.500000 0.500000 0.000000 40  ! S
+  0.000000 0.500000 0.000000 40  ! Y
+  0.000000 0.000000 0.000000 1  ! G

@@ -1,0 +1,76 @@
+Monolayer GeS (Pmn2_1) Wannier model: summary (2026-10-01)
+===========================================================
+
+Structure
+---------
+- Puckered, phosphorene-like monolayer, space group Pmn2_1 (No. 31). QE finds
+  4 symmetry operations with no inversion (point group mm2).
+- Axes: x = armchair (the polar axis), y = zigzag, z = vacuum (c = 20 A).
+- Lattice: a = 4.40 A, b = 3.68 A, the PBE values from Gomes & Carvalho,
+  PRB 92, 085406 (2015), Table I. The cell is fixed at these values.
+- Atoms were relaxed at fixed cell (PBE, 45/360 Ry). The run was stopped after
+  14 BFGS steps at a total force of 8e-4 Ry/bohr (about 0.02 eV/A).
+  Resulting bonds: Ge-S 2.42 A between sublayers, 2.48 A in-plane (x2).
+  Layer thickness (Ge-Ge in z): 2.55 A.
+  Fractional positions (same order in QE and .win):
+    Ge  0.0067216305  0.25  0.5638065245
+    S   0.1332783695  0.25  0.4461607974
+    Ge  0.5067216305  0.75  0.4361934755
+    S   0.6332783695  0.75  0.5538392026
+
+DFT setup
+---------
+- PBE, no SOC. GBRV USPPs from SSSP efficiency (Ge has 3d in valence).
+  Cutoffs 45/360 Ry. No dipole correction is needed, because the n-glide
+  (z -> -z) rules out an out-of-plane dipole.
+- 12x14x1 grid for SCF, NSCF and Wannier (similar spacing along a and b).
+  The NSCF uses 40 bands.
+
+Wannier setup
+-------------
+- 16 WFs: Ge s,p and S s,p on all 4 atoms. guiding_centres = true (2D).
+- exclude_bands 1-10 (Ge 3d), which leaves num_bands = 30.
+  The Wannier set holds 10 valence and 6 conduction bands.
+- Windows (absolute eV, QE scale): dis_froz_max = 3.2, dis_win_max = 8.0.
+  VBM = -1.900 eV (path maximum), so the frozen window ends at VBM+5.1,
+  just below the bottom of DFT band 17 (3.27 eV).
+- Spread: Omega_I = 34.8, Omega_D = 0.64, total 44.6 A^2.
+  Each WF stays assigned to its own atom: S-centred WFs are 0.38-0.53 A from
+  the S nucleus, Ge-centred WFs 0.56-0.87 A from Ge (shifted toward the bonds
+  and the lone pair). Symmetry-related WFs have identical spreads.
+- write_tb, write_hr and write_xyz are on. translate_home_cell is OFF: this
+  3.1.0 build writes wrong translated centres to the .xyz (the tb.dat is not
+  affected). The .xyz centres are raw, and some sit one lattice vector (c)
+  below their atom.
+
+Results (path G-X-S-Y-G, compared with PBE)
+-------------------------------------------
+- Gap: DFT 1.702 eV, Wannier 1.711 eV. The gap is indirect: VBM on G-X
+  (about 3/4 of the way to X), CBM on Y-G. Gomes & Carvalho report 1.69 eV
+  (PBE, QE).
+- Maximum |E_W - E_DFT|: valence 15 meV; conduction 35 meV below VBM+4 eV,
+  70 meV below VBM+5 eV, 0.35 eV below VBM+6 eV.
+- Plot: GeS_wannier_bands.png
+
+Window tests (in test_A to test_E)
+----------------------------------
+  froz/win (eV)   Omega_tot   err CB <VBM+4   err CB <VBM+5   err CB <VBM+6
+  3.2 / 8.0 (A)*     44.6        0.035          0.07            0.35
+  2.5 / 7.0 (B)      31.2        0.009          0.95            1.17
+  2.9 / 8.0 (D)       --         0.007          0.12            1.18
+  3.2 / 6.0 (E)      44.6        0.034          0.07            0.33
+  (* = chosen)
+A was chosen for accuracy over a wide range of optical energies, the same
+trade-off as for GaAs. If only the band edges matter, D is the alternative
+(valence error under 1 meV, gap error 3 meV).
+
+Cost (4 MPI ranks, -nk 4)
+-------------------------
+SCF 7 min, NSCF (168 k, 40 bands) 51 min, pw2wannier90 6 min,
+DFT path bands (161 k) 48 min, wannier90 under 1 min.
+
+Sources
+-------
+- Gomes & Carvalho, Phosphorene analogues: isoelectronic two-dimensional
+  group-IV monochalcogenides with orthorhombic structure, PRB 92, 085406
+  (2015): https://arxiv.org/abs/1504.05627
